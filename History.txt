@@ -2,3 +2,8 @@
 
 * 1 major enhancement:
   * Initial release
+
+=== 0.0.3 2012-11-12
+
+* Added descriptions and homepage
+* Removing newgem.
