@@ -1,2 +1,2 @@
-include 'lib/bitmask/bitmask.rb'
-include 'lib/bitmask/bitmask_attribute.rb'
+include 'lib/bitmask/bitmask'
+include 'lib/bitmask/bitmask_attribute'
