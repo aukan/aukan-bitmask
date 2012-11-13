@@ -20,11 +20,19 @@ class Bitmask
   def get ( bit_id )
     position = @bit_ids.index( bit_id )
 
+    if position == nil
+      raise "#{bit_id.inspect} was not included on bit_ids array"
+    end
+
     return (@value & (2 ** position)) > 0
   end
 
   def set ( bit_id, val )
     position = @bit_ids.index( bit_id )
+
+    if position == nil
+      raise "#{bit_id.inspect} was not included on bit_ids array"
+    end
 
     if val == true
       self.value |= (2 ** position)
