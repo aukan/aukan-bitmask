@@ -1,0 +1,14 @@
+History.txt
+Manifest.txt
+PostInstall.txt
+README.md
+README.rdoc
+Rakefile
+lib/bitmask.rb
+lib/bitmask/bitmask.rb
+lib/bitmask/bitmask_attribute.rb
+script/console
+script/destroy
+script/generate
+test/test_bitmask.rb
+test/test_helper.rb
