@@ -59,10 +59,7 @@ Uses Bitmask to decorate a class attribute. Can be used on ActiveRecord or any O
 Usage:
 
 ```rb
-require 'lib/bitmask/bitmask'
-require 'lib/bitmask/bitmask_attribute'
-
-class Algo
+class Something
   attr_accessor :flags
 
   include BitmaskAttribute
@@ -74,5 +71,9 @@ class Algo
   }
 end
 
-algo = Algo.new
+algo = Something.new
+algo.flags_bitmask.set(:flag1, false)
+
+algo.flags_bitmask.get(:flag1) # false
+algo.flags_bitmask.get(:flag2) # true
 ```
