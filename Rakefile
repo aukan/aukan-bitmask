@@ -1,8 +1,9 @@
-require 'rubygems'
-require './lib/bitmask'
+require 'rake'
+require 'rake/testtask'
 
-Dir['tasks/**/*.rake'].each { |t| load t }
+Rake::TestTask.new do |t|
+   t.libs << 'test'
+end
 
-# TODO - want other tests/tasks run by default? Add them to the list
-# remove_task :default
-# task :default => [:spec, :features]
+desc "Run tests"
+task :default => :test
