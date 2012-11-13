@@ -13,9 +13,10 @@ Hoe.plugin :newgem
 $hoe = Hoe.spec 'aukan-bitmask' do
   self.developer 'Pablo Antonio Gonzalez Cervantes', 'pbglezc@gmail.com'
   self.rubyforge_name       = self.name # TODO this is default value
-  self.version              = '0.0.1'
-  # self.extra_deps         = [['activesupport','>= 2.0.2']]
-
+  self.version              = '0.0.3'
+  self.summary              = 'Agnostic Bitmask and BitmaskAttribute.'
+  self.description          = 'Agnostic Bitmask and BitmaskAttribute. This gem includes Bitmask for standalone usage, and BitmaskAttribute to decorate an existing attribute on any class.'
+  self.homepage             = 'https://github.com/aukan/aukan-bitmask'
 end
 
 require 'newgem/tasks'
