@@ -3,6 +3,5 @@ Manifest.txt
 README.md
 README.rdoc
 Rakefile
-lib/aukan-bitmask.rb
-lib/bitmask.rb
-lib/bitmask_attribute.rb
+lib/*
+test/*
