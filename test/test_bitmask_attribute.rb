@@ -13,6 +13,7 @@ class TestBitmaskAttribute < Test::Unit::TestCase
 
   def setup
     @something = Something.new
+    @something.flags = nil
   end
 
   def test_initialization_respects_the_attribute
