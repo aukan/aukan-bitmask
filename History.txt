@@ -11,3 +11,7 @@
 === 0.0.4 2012-11-27
 
 * Fix: When used on ActiveRecord the attribute_name was not being updated.
+
+=== 0.0.5 2012-11-27
+
+* Fix: When used on ActiveRecord, the bitmask value was not the same as the attribute.

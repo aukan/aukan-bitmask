@@ -18,7 +18,7 @@ module BitmaskAttribute
         def #{options[:bitmask_object]}
           @_#{options[:bitmask_object]} ||= Bitmask.new({
             :bit_ids => #{options[:bit_ids].inspect},
-            :value => @#{attribute_name},
+            :value => self.#{attribute_name},
             :after_change => Proc.new { |bitmask|
               self.#{attribute_name} = bitmask.value
             }
