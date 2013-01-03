@@ -70,4 +70,38 @@ class TestBitmask < Test::Unit::TestCase
     @bitmask.value = 1
     assert number == 5
   end
+
+  def test_getting_attributes_with_square_brackets
+    assert @bitmask[:flag1] == false
+    assert @bitmask[:flag2] == false
+    assert @bitmask[:flag3] == false
+  end
+
+  def test_setting_attributes_with_square_brackets
+    @bitmask[:flag1] = true
+    @bitmask[:flag2] = false
+    @bitmask[:flag3] = true
+
+    assert @bitmask[:flag1] == true
+    assert @bitmask[:flag2] == false
+    assert @bitmask[:flag3] == true
+  end
+
+  def test_getting_missing_attribute_raises_error
+    assert_raise(ArgumentError) { @bitmask.get(:me_not_here) }
+    assert_raise(ArgumentError) { @bitmask[:me_not_here] }
+  end
+
+  def test_setting_missing_attribute_raises_error
+    assert_raise(ArgumentError) { @bitmask.set(:me_not_here, true) }
+    assert_raise(ArgumentError) { @bitmask[:me_not_here] = true }
+  end
+
+  def test_setting_returns_the_value_set
+    assert (@bitmask[:flag3] = true) == true
+    assert (@bitmask[:flag3] = false) == false
+
+    assert (@bitmask.set(:flag3, true)) == true
+    assert (@bitmask.set(:flag3, false)) == false
+  end
 end
