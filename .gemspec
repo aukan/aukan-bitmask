@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'rake'
 
 spec = Gem::Specification.new do |s|
   s.author = 'Pablo Gonzalez'
