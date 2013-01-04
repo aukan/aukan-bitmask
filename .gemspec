@@ -10,5 +10,5 @@ spec = Gem::Specification.new do |s|
   s.homepage = 'https://github.com/aukan/aukan-bitmask'
   s.rubyforge_project = 'aukan-bitmask'
 
-  s.files = FileList[ File.read('Manifest.txt').split(/\n/) ].to_a
+  s.files = File.read('Manifest.txt').split(/\n/).map{|x| Dir[x]}.flatten
 end
