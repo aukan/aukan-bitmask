@@ -21,17 +21,18 @@ class Bitmask
     position = @bit_ids.index( bit_id )
 
     if position == nil
-      raise "#{bit_id.inspect} was not included on bit_ids array"
+      raise ArgumentError, "#{bit_id.inspect} was not included on bit_ids array"
     end
 
-    return (@value & (2 ** position)) > 0
+    (@value & (2 ** position)) > 0
   end
+  alias :[] :get
 
   def set ( bit_id, val )
     position = @bit_ids.index( bit_id )
 
     if position == nil
-      raise "#{bit_id.inspect} was not included on bit_ids array"
+      raise ArgumentError, "#{bit_id.inspect} was not included on bit_ids array"
     end
 
     if val == true
@@ -42,8 +43,9 @@ class Bitmask
 
     @after_change.call(self) if @after_change
 
-    return self.value
+    val
   end
+  alias :[]= :set
 
   def value= ( val )
     @value = val

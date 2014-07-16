@@ -14,7 +14,7 @@ module BitmaskAttribute
       options = default_options.merge(options)
 
       bitmask_obj = options[:bitmask_object]
-      class_eval <<-ADD_METHOD
+      class_eval <<-ADD_METHODS
         def #{options[:bitmask_object]}
           @_#{options[:bitmask_object]} ||= Bitmask.new({
             :bit_ids => #{options[:bit_ids].inspect},
@@ -24,7 +24,14 @@ module BitmaskAttribute
             }
           })
         end
-      ADD_METHOD
+
+        def #{options[:bitmask_object]}= new_bitmask_hash
+          new_bitmask_hash.each do |key, val|
+            #{options[:bitmask_object]}[key] = val
+          end
+          #{options[:bitmask_object]}
+        end
+      ADD_METHODS
 
     end
 

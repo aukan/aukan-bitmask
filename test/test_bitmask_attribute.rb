@@ -34,4 +34,17 @@ class TestBitmaskAttribute < Test::Unit::TestCase
     assert @something.flags_bitmask.bit_ids == [:flag1, :flag2, :flag3]
   end
 
+  def test_setting_with_a_hash
+    @something.flags_bitmask= { :flag1 => true, :flag2 => false, :flag3 => true }
+    assert @something.flags == 5
+
+    @something.flags_bitmask= { :flag1 => false }
+    assert @something.flags == 4
+
+    @something.flags_bitmask= { :flag2 => true }
+    assert @something.flags == 6
+
+    assert_raise(ArgumentError) { @something.flags_bitmask= { :i_dont_exist => true } }
+  end
+
 end
