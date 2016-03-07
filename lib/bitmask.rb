@@ -1,7 +1,7 @@
 class Bitmask
 
   attr_accessor :bit_ids, :after_change
-  attr_reader   :value
+  attr_reader   :value, :string_bit_ids
 
   def initialize ( options = {} )
     default_values = {
@@ -15,6 +15,7 @@ class Bitmask
 
     @value   = options[:value].to_i
     @bit_ids = options[:bit_ids]
+    @string_bit_ids = @bit_ids.map(&:to_s)
   end
 
   def get ( bit_id )

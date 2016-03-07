@@ -27,6 +27,7 @@ module BitmaskAttribute
 
         def #{options[:bitmask_object]}= new_bitmask_hash
           new_bitmask_hash.each do |key, val|
+            key = key.to_sym if #{options[:bitmask_object]}.string_bit_ids.include?(key)
             #{options[:bitmask_object]}[key] = val
           end
           #{options[:bitmask_object]}
