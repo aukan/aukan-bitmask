@@ -47,4 +47,17 @@ class TestBitmaskAttribute < Test::Unit::TestCase
     assert_raise(ArgumentError) { @something.flags_bitmask= { :i_dont_exist => true } }
   end
 
+  def test_setting_with_a_hash_with_string_keys
+    @something.flags_bitmask= { "flag1" => true, "flag2" => false, "flag3" => true }
+    assert @something.flags == 5
+
+    @something.flags_bitmask= { "flag1" => false }
+    assert @something.flags == 4
+
+    @something.flags_bitmask= { "flag2" => true }
+    assert @something.flags == 6
+
+    assert_raise(ArgumentError) { @something.flags_bitmask= { "i_dont_exist" => true } }
+  end
+
 end
