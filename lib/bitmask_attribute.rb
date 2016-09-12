@@ -13,7 +13,6 @@ module BitmaskAttribute
       }
       options = default_options.merge(options)
 
-      bitmask_obj = options[:bitmask_object]
       class_eval <<-ADD_METHODS
         def #{options[:bitmask_object]}
           @_#{options[:bitmask_object]} ||= Bitmask.new({
