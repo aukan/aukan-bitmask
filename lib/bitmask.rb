@@ -36,7 +36,7 @@ class Bitmask
       raise ArgumentError, "#{bit_id.inspect} was not included on bit_ids array"
     end
 
-    if val == true
+    if val
       self.value |= (2 ** position)
     else
       self.value &= ~(2 ** position)
