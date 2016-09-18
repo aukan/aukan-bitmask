@@ -38,6 +38,19 @@ module BitmaskAttribute
         send(options[:bitmask_object])
       end
 
+      if options[:accessors]
+        options[:bit_ids].each do |attr|
+          define_method(attr) do
+            send(options[:bitmask_object])[attr]
+          end
+          alias_method "#{attr}?", attr
+
+          define_method("#{attr}=") do |value|
+            send(options[:bitmask_object])[attr] = value
+          end
+        end
+      end
+
     end
 
   end

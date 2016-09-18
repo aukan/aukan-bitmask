@@ -77,3 +77,5 @@ algo.flags_bitmask.set(:flag1, false)
 algo.flags_bitmask.get(:flag1) # false
 algo.flags_bitmask.get(:flag2) # true
 ```
+
+To add accessor methods for each flag (`flag1`/`flag1?`/`flag1=`) pass the option `:accessors => true`.
