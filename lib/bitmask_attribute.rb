@@ -51,6 +51,34 @@ module BitmaskAttribute
         end
       end
 
+      if defined?(::ActiveRecord)
+        # Emulate ActiveRecord dirty methods
+        define_method("#{options[:bitmask_object]}_was") do
+          Bitmask.new(
+            :bit_ids => options[:bit_ids],
+            :value => send("#{attribute_name}_was")
+          )
+        end
+
+        define_method("#{options[:bitmask_object]}_changed?") do
+          send("#{attribute_name}_changed?")
+        end
+
+        if options[:accessors]
+          options[:bit_ids].each do |attr|
+            # Emulate ActiveRecord dirty methods for every attribute
+            define_method("#{attr}_was") do
+              send("#{options[:bitmask_object]}_was")[attr]
+            end
+
+            define_method("#{attr}_changed?") do
+              send("#{attribute_name}_changed?") &&
+                send("#{attr}_was") != send(attr)
+            end
+          end
+        end
+      end
+
     end
 
   end

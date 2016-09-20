@@ -79,3 +79,17 @@ algo.flags_bitmask.get(:flag2) # true
 ```
 
 To add accessor methods for each flag (`flag1`/`flag1?`/`flag1=`) pass the option `:accessors => true`.
+
+# ActiveRecord Integration
+
+If ActiveRecord is loaded, the "dirty" methods are emulated for the bitmask object:
+
+- `flags_bitmask_changed?`
+- `flags_bitmask_was`
+
+If :accessors is enabled, they are emulated for each attribute:
+
+- `flag1_changed?`
+- `flag1_was`
+
+ActiveRecord typecasting is used when setting values: common strings found in web forms like `"1"`/`"0"` convert to `true`/`false` respectively.
