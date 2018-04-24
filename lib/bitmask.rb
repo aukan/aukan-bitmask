@@ -1,7 +1,9 @@
+require File.dirname(__FILE__) + '/aukan-bitmask/active_record'
+
 class Bitmask
 
   attr_accessor :bit_ids, :after_change
-  attr_reader   :value
+  attr_reader   :value, :string_bit_ids
 
   def initialize ( options = {} )
     default_values = {
@@ -15,6 +17,7 @@ class Bitmask
 
     @value   = options[:value].to_i
     @bit_ids = options[:bit_ids]
+    @string_bit_ids = @bit_ids.map(&:to_s)
   end
 
   def get ( bit_id )
@@ -35,7 +38,7 @@ class Bitmask
       raise ArgumentError, "#{bit_id.inspect} was not included on bit_ids array"
     end
 
-    if val == true
+    if typecast_value(val)
       self.value |= (2 ** position)
     else
       self.value &= ~(2 ** position)
@@ -52,4 +55,13 @@ class Bitmask
     @after_change.call(self) if @after_change
   end
 
+  private
+
+  def typecast_value(val)
+    if ::AukanBitmask::ActiveRecord.enabled?
+      ::AukanBitmask::ActiveRecord.cast_boolean(val)
+    else
+      val # default is value truthiness
+    end
+  end
 end

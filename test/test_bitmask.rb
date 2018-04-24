@@ -23,6 +23,10 @@ class TestBitmask < Test::Unit::TestCase
     assert @bitmask.bit_ids == [:flag1, :flag2, :flag3]
   end
 
+  def test_keeps_string_bit_ids
+    assert @bitmask.string_bit_ids == ["flag1", "flag2", "flag3"]
+  end
+
   def test_all_flags_are_false
     assert @bitmask.get(:flag1) == false
     assert @bitmask.get(:flag2) == false
