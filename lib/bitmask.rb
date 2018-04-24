@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + '/aukan-bitmask/active_record'
+
 class Bitmask
 
   attr_accessor :bit_ids, :after_change
@@ -56,22 +58,10 @@ class Bitmask
   private
 
   def typecast_value(val)
-    # Emulate the Rails typecast that happens in case the value originated from
-    # a web form where the value is typically "0"/"1".
-    case active_record_major_version
-    when 5
-      ::ActiveRecord::Type::Boolean.new.cast(val)
-    when 4
-      ::ActiveRecord::Type::Boolean.new.type_cast_from_user(val)
-    when 3
-      ::ActiveRecord::ConnectionAdapters::Column.value_to_boolean(val)
+    if ::AukanBitmask::ActiveRecord.enabled?
+      ::AukanBitmask::ActiveRecord.cast_boolean(val)
     else
       val # default is value truthiness
     end
-  end
-
-  def active_record_major_version
-    return unless defined?(::ActiveRecord::VERSION::MAJOR)
-    ::ActiveRecord::VERSION::MAJOR
   end
 end

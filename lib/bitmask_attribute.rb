@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + '/aukan-bitmask/active_record'
+
 module BitmaskAttribute
 
   def self.included (base)
@@ -51,8 +53,8 @@ module BitmaskAttribute
         end
       end
 
-      if defined?(::ActiveRecord)
-        # Emulate ActiveRecord dirty methods
+      # Emulate ActiveRecord dirty methods
+      if ::AukanBitmask::ActiveRecord.enabled?
         define_method("#{options[:bitmask_object]}_was") do
           Bitmask.new(
             :bit_ids => options[:bit_ids],
@@ -74,6 +76,22 @@ module BitmaskAttribute
             define_method("#{attr}_changed?") do
               send("#{attribute_name}_changed?") &&
                 send("#{attr}_was") != send(attr)
+            end
+          end
+        end
+
+        if ::AukanBitmask::ActiveRecord.version_string >= "5.1"
+          define_method("#{options[:bitmask_object]}_before_last_save") do
+            Bitmask.new(
+              :bit_ids => options[:bit_ids],
+              :value => attribute_before_last_save(attribute_name)
+            )
+          end
+
+          if options[:accessors]
+            define_method("saved_change_to_#{options[:bitmask_object]}_attribute?") do |attr|
+              saved_change_to_attribute?(attribute_name) &&
+                send("#{options[:bitmask_object]}_before_last_save")[attr] != send(attr)
             end
           end
         end
